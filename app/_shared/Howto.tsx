@@ -11,8 +11,8 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 function Howto() {
   return (
-    <div className=" flex items-center justify-center">
-      <section className="py-16 bg-slate-50">
+    <div className=" flex items-center justify-center mt-10 mb-10">
+      <section className="py-10 bg-slate-50 rounded-3xl">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-4">See how it works</h2>
         <p className="text-slate-600 mb-10">
@@ -21,7 +21,7 @@ function Howto() {
 
         <Dialog>
           <DialogTrigger asChild>
-            <div className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-2xl h-100 w-150">
+            <div className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-2xl lg:h-100 lg:w-150 ">
               <img
                 src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
                 alt="Video thumbnail"

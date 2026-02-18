@@ -11,7 +11,7 @@ import { CarouselData } from "@/data/CarouselData";
 
 function CarouselSection() {
   return (
-    <div className="mt-5 mx-50 items-center justify-center flex-1">
+    <div className="mt-5 lg:mx-50 mx-15 items-center justify-center flex-1">
       <Carousel>
         <CarouselContent>
           {CarouselData.map((place) => (

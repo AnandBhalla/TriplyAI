@@ -12,6 +12,8 @@ function Hero() {
 
   
 const router= useRouter();
+const travelId = crypto.randomUUID();
+
   return (
     <div className=' mt-5 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-3'>
         
@@ -37,7 +39,7 @@ const router= useRouter();
 
       <h2 className='text-5xl font-bold text-center'>Every Trip, Perfectly Planned</h2>
       <p className='text-center text-xl text-gray-600 z-10  mt-3'>Hi, I am your <span className='text-primary font-bold'>Triply</span>  Travel Guide, lets plan your first trip</p>
-      <Button onClick={()=>router.push('/travel')} className='cursor-pointer animate-bounce'>Start Trip</Button>
+      <Button onClick={()=>router.push('/travel/'+travelId)} className='cursor-pointer animate-bounce'>Start Trip</Button>
       
     </div>
   )

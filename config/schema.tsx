@@ -10,8 +10,11 @@ export const usersTable = pgTable("users", {
 export const tripsTable = pgTable("trips", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
 
-  tripid: integer("tripid").notNull().unique(),
-  useremail: varchar("useremail", { length: 255 }).notNull(),
+  travelId: varchar("travelId", { length: 255 }).notNull().unique(),
+
+  useremail: varchar("useremail", { length: 255 })
+    .references(() => usersTable.email)
+    .notNull(),
 
   source: varchar("source", { length: 100 }).notNull(),
   destination: varchar("destination", { length: 100 }).notNull(),

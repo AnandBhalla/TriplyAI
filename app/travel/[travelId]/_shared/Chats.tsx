@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { useParams } from "next/navigation";
+
 import StartChat from "./StartChat";
 import Source from "./Source";
 import Destination from "./Destination";
@@ -9,11 +11,19 @@ import Budgets from "./Budgets";
 import TotalPassenger from "./TotalPassenger";
 import CountDays from "./CountDays";
 import Request from "./Request";
+
 import { TripData } from "@/types/TripData";
 
-function Chats() {
-  const [currStep, setCurrStep] = useState(0);
+interface ChatsProps {
+  onInfoReady: (ready: boolean, info: TripData) => void;
+}
 
+function Chats({ onInfoReady }: ChatsProps) {
+  const params = useParams();
+  const travelId = params?.travelId as string;
+
+  const [currStep, setCurrStep] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
   const [tripInfo, setTripInfo] = useState<TripData>({
     source: "",
     destination: "",
@@ -24,50 +34,34 @@ function Chats() {
     specialRequests: "",
   });
 
-  const updateData = (newData: Partial<TripData>) => {
-    setTripInfo((prev) => ({ ...prev, ...newData }));
+  const updateData = (data: Partial<TripData>) => {
+    const updated = { ...tripInfo, ...data };
+    setTripInfo(updated);
     setCurrStep((prev) => prev + 1);
+
+    if (currStep === 7 && !submitted) {
+      setSubmitted(true);
+      onInfoReady(true, updated);
+    }
   };
 
   return (
-    <div className="bg-primary/10 h-[80vh] overflow-auto  w-210 ml-10 p-5 rounded-2xl shadow flex flex-col gap-5">
-       
-        {currStep >= 0 && (
-        <StartChat onNext={() => setCurrStep(1)} step={currStep} />
-      )}
+    <>
+    {!submitted && 
+    <div className="bg-primary/20 h-[80vh] overflow-auto w-210 ml-10 p-5 rounded-2xl shadow flex flex-col gap-5">
+      {currStep >= 0 && <StartChat onNext={() => setCurrStep(1)} step={currStep} />}
+      {currStep >= 1 && <Source onNext={(v: string) => updateData({ source: v })} step={currStep} />}
+      {currStep >= 2 && <Destination onNext={(v: string) => updateData({ destination: v })} step={currStep} />}
+      {currStep >= 3 && <People onNext={(v: string) => updateData({ people: v })} step={currStep} />}
+      {currStep >= 4 && <TotalPassenger onNext={(v: number) => updateData({ travelers: v })} step={currStep} />}
+      {currStep >= 5 && <Budgets onNext={(v: string) => updateData({ budget: v })} step={currStep} />}
+      {currStep >= 6 && <CountDays onNext={(v: number) => updateData({ duration: v })} step={currStep} />}
+      {currStep >= 7 && <Request onNext={(v: string) => updateData({ specialRequests: v })} step={currStep} />}
+    </div>} 
+    </>
 
-     {currStep >= 1 && (
-        <Source onNext={(val: string) => updateData({ source: val })} step={currStep} />
-      )}
-      
-      {currStep >= 2 && (
-        <Destination onNext={(val: string) => updateData({ destination: val })} step={currStep} />
-      )}
-      
-      {currStep >= 3 && (
-        <People onNext={(val: string) => updateData({ people: val })} step={currStep} />
-      )}
-      
-      {currStep >= 4 && (
-        <TotalPassenger onNext={(val: number) => updateData({ travelers: val })} step={currStep} />
-      )}
-      
-      {currStep >= 5 && (
-        <Budgets onNext={(val: string) => updateData({ budget: val })} step={currStep} />
-      )}
-      
-      {currStep >= 6 && (
-        <CountDays onNext={(val: number) => updateData({ duration: val })} step={currStep} />
-      )}
-      
-      {currStep >= 7 && (
-        <Request onNext={(val: string) => updateData({ specialRequests: val })} step={currStep} />
-      )}
+   
 
-      {/* {currStep >= 8 && (
-       api call
-      )} */}
-    </div>
   );
 }
 

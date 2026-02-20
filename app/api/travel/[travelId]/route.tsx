@@ -115,7 +115,7 @@ Return a single JSON object with the following structure:
 ]
 }
 CONSTRAINTS:
-"Maker sure images links are working and not broken"
+"Maker sure images links are only from unsplash.com ONLY no other Websites"
 "hotel" array MUST contain exactly 3 objects
 "train" array MUST contain minimum 1 and maximum 3 objects
 "flights" array MUST contain minimum 1 and maximum 3 objects

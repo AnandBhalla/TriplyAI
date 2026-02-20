@@ -1,9 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // images: {
+  //   domains: ["images.unsplash.com", "unsplash.com","upload.wikimedia.org"], 
+  // },
   images: {
-    domains: ["images.trvl-media.com", "lh3.googleusercontent.com","upload.wikimedia.org","img.youtube.com"], 
-  },
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "upload.wikimedia.org",
+    },
+    {
+      protocol: "https",
+      hostname: "images.unsplash.com",
+    },
+  ],
+},
 };
 
 export default nextConfig;

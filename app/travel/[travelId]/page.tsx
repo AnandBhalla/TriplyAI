@@ -8,6 +8,7 @@ import TravelHeader from "./_shared/TravelHeader";
 import Chats from "./_shared/Chats";
 import Display from "./_shared/Display";
 import { resumeAndPrerender } from "react-dom/static";
+import { ClipLoader } from "react-spinners";
 
 function Page() {
   const params = useParams();
@@ -53,7 +54,7 @@ function Page() {
     };
 
     fetchTravelData();
-  }, [travelId]);
+  }, [travelId,tripInfo,infoReady]);
 
   return (
     <div>
@@ -65,12 +66,13 @@ function Page() {
             setTripInfo(info);
           }}
         />
-        {loading && (
-          <div className="text-gray-500 font-medium ml-10">
-            Loading your journey...
-          </div>
+        {travelData ? (
+          <Display travelData={travelData} />
+        ) : (
+         <div className="bg-primary/20 h-[80vh] w-80 md:w-210 ml-10 p-6 rounded-2xl shadow flex items-center justify-center">
+        <ClipLoader size={45} color="#6366f1" />
+      </div>
         )}
-        {travelData && <Display travelData={travelData} />}
       </div>
     </div>
   );

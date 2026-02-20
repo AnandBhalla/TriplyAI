@@ -3,9 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function TravelHeader() {
+  const router = useRouter();
   const { user } = useUser();
   return (
     <div className="flex justify-between items-center p-3 h-25">
@@ -14,7 +16,7 @@ function TravelHeader() {
       </div>
 
       <div className="flex gap-3 items-center justify-center mx-3">
-        <Button variant={"ghost"} className="cursor-pointer border-primary border">My Trips</Button>
+        <Button variant={"ghost"} onClick={()=>router.push("mytrips")} className="cursor-pointer border-primary border">My Trips</Button>
         {!user ? (
           <SignInButton mode="modal">
             <Button size={"sm"} className="cursor-pointer">

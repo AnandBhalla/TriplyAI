@@ -36,11 +36,6 @@ function Howto() {
                 </div>
               </div>
 
-              {/* <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center ">
-                <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-sm font-medium border border-white/30">
-                  2:30 Min Demo
-                </span>
-              </div> */}
             </div>
           </DialogTrigger>
 
@@ -52,7 +47,7 @@ function Howto() {
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                src={null}
                 title="How it works"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
